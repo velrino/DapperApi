@@ -9,7 +9,7 @@ namespace ApiDapper.Respositories.Interfaces
 {
     interface IRawLogDatamiRepository 
     {
-        List<RawLogDatami> ListarTodos();
+        List<dynamic> ListarTodos(int page);
 
         List<RawLogDatami> Obter(string campanha_id);
     }

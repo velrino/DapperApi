@@ -22,14 +22,23 @@ namespace ApiDapper.Respositories
             _db = new Npgsql.NpgsqlConnection(ConfigurationManager.ConnectionStrings["PostgresSQLMUV"].ConnectionString);
         }
 
-        public List<RawLogDatami> ListarTodos()
+        public List<dynamic> ListarTodos(int page = 1)
         {
-            return _db.Query<RawLogDatami>("SELECT * FROM datami.raw_log_datami LIMIT 50").Skip(0).Take(15).ToList();
+            var teste = _db.Query("SELECT * FROM datami.cliente", page, 3).ToList();
+            return teste;
         }
 
         public List<RawLogDatami> Obter(string campanha_id)
         {
             return _db.Query<RawLogDatami>("SELECT * FROM datami.raw_log_datami where campanha_id = '"+ campanha_id + "' LIMIT 5").ToList();
+        }
+    }
+
+    public static class DbConnectionExtensions
+    {
+        public static IEnumerable<dynamic> Query(this IDbConnection cnn, string sql, int page, int limit, object param = null, IDbTransaction transaction = null, bool buffered = true, int? commandTimeout = null, CommandType? commandType = null)
+        {
+            return cnn.Query<dynamic>(string.Format(@"{0} OFFSET {1} LIMIT {2}", sql, (page - 1) * limit, limit), param, transaction, buffered, commandTimeout, commandType);
         }
     }
 }

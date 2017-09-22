@@ -18,9 +18,9 @@ namespace ApiDapper.Controllers
             _Repository = new RawLogDatamiRepository();
         }
         // GET: api/Raw
-        public List<RawLogDatami> Get() => _Repository.ListarTodos();
+        public List<dynamic> Get(int? page) => _Repository.ListarTodos(page ?? 1);
 
         // GET: api/Raw/5
-        public List<RawLogDatami> Get(string id) => _Repository.Obter(id);
+ //       public List<RawLogDatami> Get(string id) => _Repository.Obter(id);
     }
 }
