@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ApiDapper.Models;
+
+namespace ApiDapper.Respositories.Interfaces
+{
+    interface IRawLogDatamiRepository 
+    {
+        List<RawLogDatami> ListarTodos();
+
+        List<RawLogDatami> Obter(string campanha_id);
+    }
+}
